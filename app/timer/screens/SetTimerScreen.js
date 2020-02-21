@@ -1,20 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 
-export default class SetTimerForm extends React.Component {
+export default class SetTimerScreen extends React.Component {
   state = {
-    workTimeMinutes: 0,
-    workTimeSeconds: 0,
-    restTimeMinutes: 0,
-    restTimeSeconds: 0
+    workTimeMinutes: "0",
+    workTimeSeconds: "0",
+    restTimeMinutes: "0",
+    restTimeSeconds: "0"
   };
 
   // Function to update the time state when form input changes
   handleChangeTime = key => value => {
-    this.setState({ [key]: val });
+    this.setState({ [key]: value });
   };
 
   render() {
+    console.log(this.props);
     return (
       <View>
         <View style={{ flexDirection: "row" }}>
@@ -29,8 +30,8 @@ export default class SetTimerForm extends React.Component {
           <TextInput
             keyboardType={"numeric"}
             value={this.state.workTimeSeconds}
+            onChangeText={this.handleChangeTime("workTimeSeconds")}
           />
-          onChangeText={this.handleChangeTime("workTimeSeconds")}
         </View>
 
         <View style={{ flexDirection: "row" }}>
@@ -49,9 +50,12 @@ export default class SetTimerForm extends React.Component {
           />
         </View>
         <Button
-          onPress={this.props.navigation.navigate("TimerScreen", {
-            ...this.state
-          })}
+          title={"GO"}
+          onPress={() =>
+            this.props.navigation.navigate("TimerScreen", {
+              ...this.state
+            })
+          }
         />
       </View>
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import { createStackNavigator } from "react-navigation-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import TaskListScreen from "./screens/TaskListScreen";
 import AddTaskScreen from "./screens/AddTaskScreen";
 
@@ -8,7 +8,7 @@ const TaskListNavStack = createStackNavigator();
 export default class TaskListStack extends React.Component {
   //   tasks are implemented as a list of task objects and saved in the state of the stack
   state = {
-    tasks: []
+    tasks: [{ taskTitle: "A task" }]
   };
   render() {
     return (
@@ -21,7 +21,7 @@ export default class TaskListStack extends React.Component {
         <TaskListNavStack.Screen
           name={"AddTask"}
           component={AddTaskScreen}
-          initialParams={{ ...this.state }}
+          initialParams={{ tasks: this.state.tasks }}
         />
       </TaskListNavStack.Navigator>
     );
