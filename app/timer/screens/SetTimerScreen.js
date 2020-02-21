@@ -6,7 +6,7 @@ export default class SetTimerForm extends React.Component {
     workTimeMinutes: 0,
     workTimeSeconds: 0,
     restTimeMinutes: 0,
-    restkTimeSeconds: 0
+    restTimeSeconds: 0
   };
 
   // Function to update the time state when form input changes
@@ -57,3 +57,9 @@ export default class SetTimerForm extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  formLabel: {
+    fontSize: 36
+  }
+});

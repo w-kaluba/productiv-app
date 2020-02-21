@@ -1,19 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-import { createSwitchNavigator } from "react-native-navigation";
-import TimerScreen from "./screens/TimerScreen";
-import SetTimerScreen from "./screens/SetTimerScreen";
+import { createStackNavigator } from "react-navigation-stack";
+import TimerScreen from "./screens/TimerScreen.js";
+import SetTimerScreen from "./screens/SetTimerScreen.js";
 
-const TimerStackNavigator = createSwitchNavigator(
-  {
-    Timer: TimerScreen,
-    SetTimer: SetTimerScreen
-  },
-  {
-    initialRouteName: "SetTimerScreen"
-  }
-);
-
+const TimerNavStack = createStackNavigator();
 export default class TimerStack extends React.Component {
   state = {
     workTime: 0,
@@ -21,11 +11,18 @@ export default class TimerStack extends React.Component {
   };
   render() {
     return (
-      <TimerStackNavigator
-        screenProps={{
-          ...this.state
-        }}
-      />
+      <TimerNavStack.Navigator initialRouteName={"SetTimerScreen"}>
+        <TimerNavStack.Screen
+          name={"TimerScreen"}
+          component={TimerScreen}
+          initialParams={{ ...this.state }}
+        />
+        <TimerNavStack.Screen
+          name={"SetTimerScreen"}
+          component={SetTimerScreen}
+          initialParams={{ ...this.state }}
+        />
+      </TimerNavStack.Navigator>
     );
   }
 }

@@ -1,31 +1,29 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-import { createStackNavigator } from "react-native-navigation";
-import TaskListScreen from "./screens/TimerScreen";
-import AddTaskScreen from "./screens/SetTimerScreen";
+import { createStackNavigator } from "react-navigation-stack";
+import TaskListScreen from "./screens/TaskListScreen";
+import AddTaskScreen from "./screens/AddTaskScreen";
 
-const TaskListNavigator = createStackNavigator(
-  {
-    TaskList: TaskListScreen,
-    AddTask: AddTaskScreen
-  },
-  {
-    initialRouteName: "SetTimerScreen"
-  }
-);
+const TaskListNavStack = createStackNavigator();
 
-export default class TimerStack extends React.Component {
+export default class TaskListStack extends React.Component {
+  //   tasks are implemented as a list of task objects and saved in the state of the stack
   state = {
-    workTime: 0,
-    restTime: 0
+    tasks: []
   };
   render() {
     return (
-      <TimerStackNavigator
-        screenProps={{
-          ...this.state
-        }}
-      />
+      <TaskListNavStack.Navigator initialRouteName={"TaskList"}>
+        <TaskListNavStack.Screen
+          name={"TaskList"}
+          component={TaskListScreen}
+          initialParams={{ ...this.state }}
+        />
+        <TaskListNavStack.Screen
+          name={"AddTask"}
+          component={AddTaskScreen}
+          initialParams={{ ...this.state }}
+        />
+      </TaskListNavStack.Navigator>
     );
   }
 }
