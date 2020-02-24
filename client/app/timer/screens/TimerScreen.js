@@ -5,7 +5,8 @@ import vibrate from "../utils/vibrate";
 export default class Timer extends React.Component {
   state = {
     resting: false,
-    timeLeft: 1500000,
+    timeLeft: this.props.route.params.workTime,
+    restTime: this.props.route.params.restTime,
     running: true
   };
 
@@ -56,20 +57,25 @@ export default class Timer extends React.Component {
 
   resetTimer = () => {
     this.setState(prevState =>
-      this.resting ? { timeLeft: 300000 } : { timeLeft: 1500000 }
+      this.resting
+        ? { timeLeft: this.props.route.params.restTime }
+        : { timeLeft: this.props.route.params.workTime }
     );
   };
 
   toggleBreak = () => {
     this.setState(prevState => ({
       resting: !prevState.resting,
-      timeLeft: prevState.resting ? 1500000 : 1000
+      timeLeft: prevState.resting
+        ? this.props.route.params.workTime
+        : this.props.route.params.restTime
     }));
   };
 
   render() {
     let displaySeconds = this.state.timeLeft % 60000;
     let displayMinutes = (this.state.timeLeft - displaySeconds) / 60000;
+    console.log(this.props);
 
     return (
       <View style={styles.container}>

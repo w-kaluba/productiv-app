@@ -17,16 +17,16 @@ export default class SetTimerScreen extends React.Component {
   render() {
     console.log(this.props);
     return (
-      <View>
-        <View style={{ flexDirection: "row" }}>
-          <Text>Work Time</Text>
-          <Text>Minutes</Text>
+      <View style={styles.container}>
+        <View style={styles.container}>
+          <Text style={styles.formLabel}>Work Time</Text>
+          <Text style={styles.formField}>Minutes</Text>
           <TextInput
             keyboardType={"numeric"}
             value={this.state.workTimeMinutes}
             onChangeText={this.handleChangeTime("workTimeMinutes")}
           />
-          <Text>Seconds</Text>
+          <Text style={styles.formField}>Seconds</Text>
           <TextInput
             keyboardType={"numeric"}
             value={this.state.workTimeSeconds}
@@ -34,15 +34,15 @@ export default class SetTimerScreen extends React.Component {
           />
         </View>
 
-        <View style={{ flexDirection: "row" }}>
-          <Text>Rest Time</Text>
-          <Text>Minutes</Text>
+        <View style={styles.container}>
+          <Text style={styles.formLabel}>Rest Time</Text>
+          <Text style={styles.formField}>Minutes</Text>
           <TextInput
             keyboardType={"numeric"}
             value={this.state.restTimeMinutes}
             onChangeText={this.handleChangeTime("restTimeMinutes")}
           />
-          <Text>Seconds</Text>
+          <Text style={styles.formField}>Seconds</Text>
           <TextInput
             keyboardType={"numeric"}
             value={this.state.restkTimeSeconds}
@@ -51,11 +51,19 @@ export default class SetTimerScreen extends React.Component {
         </View>
         <Button
           title={"GO"}
-          onPress={() =>
+          onPress={() => {
+            let workTime =
+              +this.state.workTimeMinutes * 60 * 1000 +
+              +this.state.workTimeSeconds * 1000;
+            let restTime =
+              +this.state.restTimeMinutes * 60 * 1000 +
+              +this.state.restTimeSeconds * 1000;
+
             this.props.navigation.navigate("TimerScreen", {
-              ...this.state
-            })
-          }
+              workTime: workTime,
+              restTime: restTime
+            });
+          }}
         />
       </View>
     );
@@ -63,7 +71,17 @@ export default class SetTimerScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
   formLabel: {
     fontSize: 36
+  },
+  formField: {
+    fontSize: 24
   }
 });
