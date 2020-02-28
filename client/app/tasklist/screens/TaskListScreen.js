@@ -4,8 +4,7 @@ import Row from "./Row";
 
 export default class TaskListScreen extends React.Component {
   state = {
-    ...this.props,
-    tasks: [this.props.tasks, this.props.routes.params.tasks]
+    ...this.props.route.params
   };
 
   render() {

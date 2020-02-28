@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const styles = StyleSheet.create({
   row: { padding: 20 }
@@ -18,9 +18,14 @@ export default class Row extends React.Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <TouchableOpacity style={styles.row} onPress={this.toggleDesc}>
-        <Text>{this.state.taskTitle}</Text>
+        <Text>
+          {this.state.task.taskTitle
+            ? this.state.task.taskTitle
+            : "No tasks found"}
+        </Text>
       </TouchableOpacity>
     );
   }

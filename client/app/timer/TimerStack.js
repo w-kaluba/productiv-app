@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import TimerScreen from "./screens/TimerScreen.js.js";
-import SetTimerScreen from "./screens/SetTimerScreen.js.js";
+import TimerScreen from "./screens/TimerScreen.js";
+import SetTimerScreen from "./screens/SetTimerScreen.js";
 
 const TimerNavStack = createStackNavigator();
 export default class TimerStack extends React.Component {
