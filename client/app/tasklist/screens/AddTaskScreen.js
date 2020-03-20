@@ -1,18 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { addTask } from "../../../redux/actions";
 
-export default class AddTaskScreen extends React.Component {
+class AddTaskScreen extends React.Component {
   state = {
-    ...this.props,
     task: {
       taskTitle: "",
       taskDescription: ""
     }
   };
 
-  // Function to update the time state when form input changes
+  // Function to update the state when form input changes
   handleChangeText = key => value => {
-    this.setState({ task: { [key]: value } });
+    this.setState(prevState => ({
+      task: {
+        ...prevState.task,
+        [key]: value
+      }
+    }));
   };
 
   render() {
@@ -31,16 +37,19 @@ export default class AddTaskScreen extends React.Component {
         <Button
           title={"Add Task"}
           onPress={() => {
-            console.log(this.state);
-            this.setState(prevState => {
-              tasks: [prevState.tasks, this.state.task];
-            });
-            this.props.navigation.navigate("TaskList", {
-              ...this.state
-            });
+            console.log(this.state.task);
+            this.props.dispatch(addTask(this.state.task));
+            this.props.navigation.navigate("TaskList");
           }}
         />
       </View>
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { tasks } = state;
+  return { tasklist: tasks.allIds };
+}
+
+export default connect(mapStateToProps)(AddTaskScreen);

@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
 import { ADD_TASK, DELETE_TASK, SET_WORK_TIMER } from "./actions";
 
-const taskListReducer = (state = { ...null }, action) => {
+const taskListReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TASK:
-      return { ...state, tasks: [...state.tasks, action.payload] };
+      console.log("Task Added");
+      return [...state, action.payload];
     case DELETE_TASK:
       pass;
   }

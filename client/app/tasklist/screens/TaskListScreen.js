@@ -1,10 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { StyleSheet, ScrollView, View, Button } from "react-native";
 import Row from "./Row";
 
-export default class TaskListScreen extends React.Component {
+class TaskListScreen extends React.Component {
   state = {
-    ...this.props.route.params
+    ...this.props
   };
 
   render() {
@@ -12,9 +13,9 @@ export default class TaskListScreen extends React.Component {
     return (
       <View>
         <ScrollView>
-          {this.state.tasks.map((task, i) => (
-            <Row task={task} key={i} />
-          ))}
+          {this.state.tasklist
+            ? this.state.tasklist.map((task, i) => <Row task={task} key={i} />)
+            : null}
         </ScrollView>
         <Button
           title={"Add Task"}
@@ -26,3 +27,10 @@ export default class TaskListScreen extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { tasks } = state;
+  return { tasklist: tasks.allIds };
+}
+
+export default connect(mapStateToProps)(TaskListScreen);
