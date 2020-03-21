@@ -22,6 +22,8 @@ class AddTaskScreen extends React.Component {
   };
 
   render() {
+    console.log(this.state);
+    console.log(this.props);
     return (
       <View>
         <Text>Task:</Text>
@@ -49,7 +51,7 @@ class AddTaskScreen extends React.Component {
 
 function mapStateToProps(state) {
   const { tasks } = state;
-  return { tasklist: tasks.allIds };
+  return { tasklist: tasks };
 }
 
 export default connect(mapStateToProps)(AddTaskScreen);

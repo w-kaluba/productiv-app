@@ -14,6 +14,7 @@ import store from "./redux/store";
 const RootStack = createBottomTabNavigator();
 export default class App extends React.Component {
   render = () => {
+    console.log(store.getState());
     return (
       <Provider store={store}>
         <NavigationContainer>

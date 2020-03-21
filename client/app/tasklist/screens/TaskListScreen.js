@@ -9,17 +9,21 @@ class TaskListScreen extends React.Component {
   };
 
   render() {
+    console.log("State:\n");
     console.log(this.state);
+    console.log("Props:\n");
+    console.log(this.props);
     return (
       <View>
         <ScrollView>
-          {this.state.tasklist
-            ? this.state.tasklist.map((task, i) => <Row task={task} key={i} />)
+          {this.props.tasklist
+            ? this.props.tasklist.map((task, i) => <Row task={task} key={i} />)
             : null}
         </ScrollView>
         <Button
           title={"Add Task"}
           onPress={() => {
+            console.log(this.state);
             this.props.navigation.navigate("AddTask");
           }}
         />
@@ -30,7 +34,7 @@ class TaskListScreen extends React.Component {
 
 function mapStateToProps(state) {
   const { tasks } = state;
-  return { tasklist: tasks.allIds };
+  return { tasklist: tasks };
 }
 
 export default connect(mapStateToProps)(TaskListScreen);
