@@ -19,7 +19,6 @@ class TaskListScreen extends React.Component {
         <Button
           title={"Add Task"}
           onPress={() => {
-            console.log(this.state);
             this.props.navigation.navigate("AddTask");
           }}
         />

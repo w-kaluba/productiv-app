@@ -7,7 +7,8 @@ class AddTaskScreen extends React.Component {
   state = {
     task: {
       taskTitle: "",
-      taskDescription: ""
+      taskDescription: "",
+      category: null
     }
   };
 
@@ -39,7 +40,6 @@ class AddTaskScreen extends React.Component {
         <Button
           title={"Add Task"}
           onPress={() => {
-            console.log(this.state.task);
             this.props.dispatch(addTask(this.state.task));
             this.props.navigation.navigate("TaskList");
           }}

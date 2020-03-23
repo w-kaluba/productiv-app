@@ -18,8 +18,6 @@ export default class Row extends React.Component {
   };
 
   render() {
-    console.log("Row state:");
-    console.log(this.state);
     return (
       <TouchableOpacity style={styles.row} onPress={this.toggleDesc}>
         <Text>
