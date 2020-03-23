@@ -9,10 +9,6 @@ class TaskListScreen extends React.Component {
   };
 
   render() {
-    console.log("State:\n");
-    console.log(this.state);
-    console.log("Props:\n");
-    console.log(this.props);
     return (
       <View>
         <ScrollView>

@@ -18,13 +18,17 @@ export default class Row extends React.Component {
   };
 
   render() {
+    console.log("Row state:");
     console.log(this.state);
     return (
       <TouchableOpacity style={styles.row} onPress={this.toggleDesc}>
         <Text>
           {this.state.task.taskTitle
             ? this.state.task.taskTitle
-            : "No tasks found"}
+            : "Untitled Task"}
+        </Text>
+        <Text>
+          {this.state.descShowing ? this.state.task.taskDescription : null}
         </Text>
       </TouchableOpacity>
     );
