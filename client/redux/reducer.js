@@ -50,6 +50,7 @@ const categoryReducer = (state = [], action) => {
     case DEL_CATEGORY:
       return [...state, action.payload];
   }
+  return state;
 };
 
 const reducer = combineReducers({

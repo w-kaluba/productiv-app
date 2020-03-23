@@ -5,6 +5,7 @@ import { addTask } from "../../../redux/actions";
 
 class AddTaskScreen extends React.Component {
   state = {
+    detailView: false,
     task: {
       taskTitle: "",
       taskDescription: "",
@@ -22,9 +23,13 @@ class AddTaskScreen extends React.Component {
     }));
   };
 
+  toggleDetails = () => {
+    this.setState(prevState => ({
+      detailView: !prevState.detailView
+    }));
+  };
+
   render() {
-    console.log(this.state);
-    console.log(this.props);
     return (
       <View>
         <Text>Task:</Text>
@@ -44,6 +49,7 @@ class AddTaskScreen extends React.Component {
             this.props.navigation.navigate("TaskList");
           }}
         />
+        <Button title={"More..."} onPress={this.toggleDetails} />
       </View>
     );
   }
