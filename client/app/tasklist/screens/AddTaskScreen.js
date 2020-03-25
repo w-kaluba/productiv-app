@@ -4,6 +4,18 @@ import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { addTask } from "../../../redux/actions";
 import { Dropdown } from "react-native-material-dropdown";
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignSelf: "center",
+    alignContent: "center",
+    padding: 50
+  },
+  button: {
+    maxWidth: 300,
+    marginTop: 20
+  }
+});
 class AddTaskScreen extends React.Component {
   state = {
     detailView: false,
@@ -52,7 +64,7 @@ class AddTaskScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Task:</Text>
         <TextInput
           value={this.state.taskTitle}
@@ -63,15 +75,23 @@ class AddTaskScreen extends React.Component {
           value={this.state.taskDescription}
           onChangeText={this.handleChangeText("taskDescription")}
         />
-        <Button
-          title={"Add Task"}
-          onPress={() => {
-            this.props.dispatch(addTask(this.state.task));
-            this.props.navigation.navigate("TaskList");
-          }}
-        />
-        <Button title={"More..."} onPress={this.toggleDetails} />
-        {this.state.detailView ? this.renderDropdown("Category...") : null}
+        <View style={styles.button}>
+          <Button
+            title={"Add Task"}
+            onPress={() => {
+              this.props.dispatch(addTask(this.state.task));
+              this.props.navigation.navigate("TaskList");
+            }}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            title={"More..."}
+            buttonStyle={styles.button}
+            onPress={this.toggleDetails}
+          />
+          {this.state.detailView ? this.renderDropdown("Category...") : null}
+        </View>
       </View>
     );
   }
