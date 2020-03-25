@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { addTask } from "../../../redux/actions";
+import { Dropdown } from "react-native-material-dropdown";
 
 class AddTaskScreen extends React.Component {
   state = {
@@ -11,6 +12,26 @@ class AddTaskScreen extends React.Component {
       taskDescription: "",
       category: null
     }
+  };
+
+  renderDropdown = (
+    label = "Select...",
+    data = [{ value: "New category..." }]
+  ) => {
+    return (
+      <Dropdown
+        label={label}
+        data={data}
+        onChangeText={value => {
+          this.setState(prevState => ({
+            task: {
+              ...prevState.task,
+              category: value
+            }
+          }));
+        }}
+      />
+    );
   };
 
   // Function to update the state when form input changes
@@ -50,14 +71,15 @@ class AddTaskScreen extends React.Component {
           }}
         />
         <Button title={"More..."} onPress={this.toggleDetails} />
+        {this.state.detailView ? this.renderDropdown("Category...") : null}
       </View>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { tasks } = state;
-  return { tasklist: tasks };
+  const { tasks, categories } = state;
+  return { tasklist: tasks, categories: categories };
 }
 
 export default connect(mapStateToProps)(AddTaskScreen);
