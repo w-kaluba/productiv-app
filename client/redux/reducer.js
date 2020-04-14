@@ -7,6 +7,14 @@ import {
   ADD_CATEGORY,
   DEL_CATEGORY
 } from "./actions";
+import { validateUser } from "../auth/users.js"
+
+const userReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SIGN_IN:
+      if()
+  }
+};
 
 const taskListReducer = (state = [], action) => {
   switch (action.type) {
@@ -54,6 +62,7 @@ const categoryReducer = (state = [], action) => {
 };
 
 const reducer = combineReducers({
+  user: userReducer,
   categories: categoryReducer,
   tasks: taskListReducer,
   timer: timerReducer,
